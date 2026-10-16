@@ -1,119 +1,153 @@
-💈 Navalha Barber
+# 💈 Navalha Barber
 
-Site de agendamento online para barbearia, com escolha de serviço, barbeiro, data e horário, resumo do pedido e lista de agendamentos marcados. Os agendamentos são salvos em um banco de dados MySQL por meio de uma API própria em Node.js.
+Sistema de agendamento online para barbearia, desenvolvido para permitir que os clientes escolham serviços, barbeiros, datas e horários de forma simples e intuitiva.
 
-Projeto desenvolvido para praticar HTML, CSS, JavaScript e integração front-end + back-end.
+O projeto utiliza uma API REST desenvolvida em Node.js e Express para gerenciar os agendamentos, com persistência dos dados em um banco de dados MySQL hospedado na nuvem.
 
-✨ Funcionalidades
-Escolha do serviço
-Escolha do barbeiro
-Seleção de data e horário
-Resumo dinâmico do agendamento (serviço, tempo estimado, preço, barbeiro, data e hora e total)
-Formulário com nome, WhatsApp, e-mail e observações
-Lista de agendamentos marcados com contador de ativos
-Cancelamento de agendamento (remove da tela e do banco)
-Persistência dos dados com API REST + MySQL
-🛠️ Tecnologias
+O objetivo do projeto é praticar o desenvolvimento web e a integração entre front-end, back-end e banco de dados.
 
-Front-end
+## ✨ Funcionalidades
 
-HTML5
-CSS3 (Flexbox e Grid)
-JavaScript (DOM, eventos, fetch)
-Font Awesome (ícones)
-Google Fonts (Hanken Grotesk e Newsreader)
+- **Escolha de serviços:** seleção do serviço desejado.
+- **Escolha de barbeiro:** seleção do profissional.
+- **Agendamento:** escolha de data e horário.
+- **Resumo dinâmico:** exibição do serviço, tempo estimado, preço, barbeiro, data, horário e valor total.
+- **Formulário de agendamento:** preenchimento de nome, WhatsApp, e-mail e observações.
+- **Lista de agendamentos:** visualização dos agendamentos marcados e contador de agendamentos ativos.
+- **Cancelamento:** exclusão de agendamentos da interface e do banco de dados.
+- **Persistência de dados:** integração com uma API REST e banco de dados MySQL.
 
-Back-end
+## 🛠️ Tecnologias utilizadas
 
-Node.js
-Express
-MySQL2
-CORS
-dotenv
+### Front-end
 
-Banco de dados e deploy
+- HTML5
+- CSS3
+- JavaScript (DOM, eventos e Fetch API)
+- Font Awesome
+- Google Fonts
 
-MySQL na nuvem (TiDB)
-API hospedada na Render
-📁 Estrutura do projeto
+### Back-end
+
+- Node.js
+- Express
+- MySQL2
+- CORS
+- dotenv
+
+### Banco de dados e hospedagem
+
+- MySQL — TiDB Cloud
+- Render — hospedagem da API
+
+## 📁 Estrutura do projeto
+
+```text
 barebaria-navalha/
 ├── frontend/
-│ ├── index.html
-│ ├── style.css
-│ └── script.js
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 ├── backend/
-│ ├── server.js
-│ ├── package.json
-│ └── .env  
+│   ├── server.js
+│   ├── package.json
+│   └── .env
 ├── images/
-│ ├── logo.png
-│ └── favicom-barber.png
+│   ├── logo.png
+│   └── favicon-barber.png
 └── README.md
+```
 
-🚀 Como executar
-Pré-requisitos
-Node.js 18 ou superior
-Um banco MySQL (local ou na nuvem)
+## 🚀 Como executar o projeto
 
-1. Clonar o repositório
-   bash
-   git clone https://github.com/seu-usuario/navalha-barber.git
-   cd navalha-barber
-2. Configurar o back-end
-   bash
-   cd backend
-   npm install
+### Pré-requisitos
 
-Crie um arquivo .env dentro da pasta backend com as suas credenciais:
+- [Node.js](https://nodejs.org/) 18 ou superior.
+- Um banco de dados MySQL local ou hospedado na nuvem.
+- Git, para clonar o repositório.
 
-env
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/dimitrirosso/barbearia-navalha.git
+cd barebaria-navalha
+```
+
+### 2. Instale as dependências do back-end
+
+```bash
+cd backend
+npm install
+```
+
+### 3. Configure as variáveis de ambiente
+
+Crie um arquivo `.env` dentro da pasta `backend/` com as credenciais do seu banco de dados:
+
+```env
 DB_HOST=seu_host
 DB_USER=seu_usuario
 DB_PORT=4000
 DB_PASSWORD=sua_senha
 DB_DATABASE=nome_do_banco
 PORT=3000
+```
 
-Inicie o servidor:
+### 4. Crie a tabela no banco de dados
 
-bash
+Execute o seguinte comando SQL no seu banco de dados:
+
+```sql
+CREATE TABLE agendamento (
+    id_agendamento INT AUTO_INCREMENT PRIMARY KEY,
+    nome_barbeiro VARCHAR(100) NOT NULL,
+    nome_cliente VARCHAR(100) NOT NULL,
+    servico VARCHAR(100) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    dia DATE NOT NULL,
+    horario TIME NOT NULL,
+    observacoes VARCHAR(255)
+);
+```
+
+### 5. Inicie o servidor
+
+Na pasta `backend/`, execute:
+
+```bash
 node server.js
+```
 
-A API ficará disponível em http://localhost:3000.
+A API ficará disponível localmente em:
 
-3. Criar a tabela no banco
-   sql
-   CREATE TABLE agendamento (
-   id_agendamento INT AUTO_INCREMENT PRIMARY KEY,
-   nome_barbeiro VARCHAR(100) NOT NULL,
-   nome_cliente VARCHAR(100) NOT NULL,
-   servico VARCHAR(100) NOT NULL,
-   preco DECIMAL(10,2) NOT NULL,
-   dia DATE NOT NULL,
-   horario TIME NOT NULL,
-   observacoes VARCHAR(255)
-   );
-4. Rodar o front-end
+```text
+http://localhost:3000
+```
 
-Abra o index.html no navegador
+### 6. Execute o front-end
 
-Por padrão, o script.js chama a API publicada na Render. Para testar com o servidor local, troque a URL nas chamadas fetch por http://localhost:3000.
+Abra o arquivo `frontend/index.html` no navegador.
 
-🔌 Endpoints da API
-Método Rota Descrição
-POST /adicionar Cria um novo agendamento
-DELETE /deletar/:id Remove um agendamento pelo id
+Por padrão, o arquivo `script.js` utiliza a URL da API hospedada na Render. Para executar tudo localmente, altere a URL utilizada nas chamadas `fetch()` para `http://localhost:3000`.
 
-🗺️ Próximos passos
-Rota GET para carregar os agendamentos já salvos ao abrir a página
-Validação dos campos obrigatórios (nome, WhatsApp, e-mail)
-Bloquear horários já ocupados para o mesmo barbeiro
-Versão responsiva para celular
-Menu de navegação funcional (Serviços, Barbeiros, Depoimentos, Localização)
+## 🔌 Endpoints da API
 
-👤 Autor
+| Método   | Rota           | Descrição                      |
+| -------- | -------------- | ------------------------------ |
+| `POST`   | `/adicionar`   | Cria um novo agendamento.      |
+| `DELETE` | `/deletar/:id` | Exclui um agendamento pelo ID. |
 
-Feito por Dimitri Rosso
+## 🗺️ Melhorias futuras
 
-GitHub: @dimitrirosso
-LinkedIn: Dimitri Rosso
+- [ ] Criar uma rota `GET` para carregar os agendamentos salvos ao abrir a página.
+- [ ] Validar os campos obrigatórios do formulário.
+- [ ] Impedir conflitos de horários para o mesmo barbeiro.
+- [ ] Melhorar a responsividade para dispositivos móveis.
+- [ ] Implementar navegação funcional para as seções de serviços, barbeiros, depoimentos e localização.
+
+## 👨‍💻 Autor
+
+**Dimitri Rosso**
+
+- GitHub: [@dimitrirosso](https://github.com/dimitrirosso)
+- LinkedIn: [dimitrirosso](https://www.linkedin.com/in/dimitri-rosso-200701ia983934892jdnzk/)
