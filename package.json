@@ -2,7 +2,7 @@
   "name": "barebaria-navalha",
   "version": "1.0.0",
   "description": "",
-  "main": "principal/backend/server.js",
+  "main": "./principal/backend/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
