@@ -11,8 +11,13 @@ app.use(cors());
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
+  port: process.env.DB_PORT,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+
+  ssl: {
+    rejectUnauthorized: true,
+  },
 });
 
 app.post("/adicionar", async (req, res) => {
@@ -58,4 +63,5 @@ app.delete("/deletar/:id", (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("rodando..."));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("Rodando...."));

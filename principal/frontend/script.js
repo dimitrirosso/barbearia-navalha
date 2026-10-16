@@ -95,11 +95,14 @@ confirmarAgendamento.addEventListener("click", async () => {
 
   divi.classList.add("card__agendamento");
 
-  const resposta = await fetch("http://localhost:3000/adicionar", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(agendamento),
-  });
+  const resposta = await fetch(
+    "https://barbearia-navalha.onrender.com/adicionar",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(agendamento),
+    },
+  );
 
   const dados = await resposta.json();
   divi.dataset.id = dados.id;
@@ -138,9 +141,12 @@ confirmarAgendamento.addEventListener("click", async () => {
 
   cancelar.addEventListener("click", async () => {
     const id = divi.dataset.id;
-    const resposta = await fetch(`http://localhost:3000/deletar/${id}`, {
-      method: "DELETE",
-    });
+    const resposta = await fetch(
+      `https://barbearia-navalha.onrender.com/deletar/${id}`,
+      {
+        method: "DELETE",
+      },
+    );
 
     divi.remove();
     contador--;
