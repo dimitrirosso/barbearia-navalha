@@ -51,10 +51,10 @@ app.post("/adicionar", async (req, res) => {
   }
 });
 
-app.delete("/deletar/:id", (req, res) => {
+app.delete("/deletar/:id", async (req, res) => {
   const id = Number(req.params.id);
   try {
-    const [resultado] = db.query(
+    const [resultado] = await db.query(
       "DELETE FROM agendamento WHERE id_agendamento = ?",
       [id],
     );
