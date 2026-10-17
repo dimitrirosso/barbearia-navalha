@@ -54,12 +54,14 @@ app.post("/adicionar", async (req, res) => {
 app.delete("/deletar/:id", async (req, res) => {
   const id = Number(req.params.id);
   try {
-    const [resultado] = db.query(
+    const [resultado] = await db.query(
       "DELETE FROM agendamento WHERE id_agendamento = ?",
       [id],
     );
+
+    res.status(200).json({ Mensagem: "deletado com sucesso" });
   } catch (error) {
-    res.status(200).json({ Mensagem: "Erro ao deletar" });
+    res.status(500).json({ Mensagem: error });
   }
 });
 

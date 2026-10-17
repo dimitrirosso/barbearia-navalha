@@ -141,15 +141,21 @@ confirmarAgendamento.addEventListener("click", async () => {
 
   cancelar.addEventListener("click", async () => {
     const id = divi.dataset.id;
-    const resposta = await fetch(
-      `https://barbearia-navalha.onrender.com/deletar/${id}`,
-      {
-        method: "DELETE",
-      },
-    );
 
-    divi.remove();
-    contador--;
-    contagemAgendamentos.innerHTML = `${contador} Ativos`;
+    try {
+      const resposta = await fetch(
+        `https://barbearia-navalha.onrender.com/deletar/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      divi.remove();
+      contador--;
+      contagemAgendamentos.innerHTML = `${contador} Ativos`;
+    } catch (error) {
+      alert("Erro ao deletar");
+      console.log(error);
+    }
   });
 });
